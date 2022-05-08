@@ -5,6 +5,8 @@ def dfs(strs, used, path, all):
     else:
         for i, str in enumerate(strs):
             if i not in used:
+                # add 和 remove
+                # 因为used结构是共用的
                 used.add(i)
                 dfs(strs, used, path+str, all)
                 used.remove(i)
