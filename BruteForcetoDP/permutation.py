@@ -10,6 +10,5 @@ def process(s, path, index):
         s[index], s[j] = s[j], s[index]
 
 
-process(['a','b','c','d'], "", 0)
+process(['a','b', 'c'], "", 0)
 print(ans)
-print(len(ans), 1*2*3*4)
