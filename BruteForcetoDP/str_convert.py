@@ -29,3 +29,28 @@ def process(str, i):
 
 s = '111'
 print(process(s, 0))
+
+def dp_ways(s):
+    n = len(s)
+    if n == 0:
+        return 0
+    dp = [0]*(n+1)
+    # i依赖i+1 和 i+2
+    dp[n] = 1
+    for i in range(n-1, -1, -1):
+        if s[i] == '0':
+            dp[i] = 0
+        
+        if s[i] == '1':
+            dp[i] = dp[i+1]
+            if i+1 < len(s):
+                dp[i] += dp[i+2]
+        
+        if s[i] == 2:
+            dp[i] = dp[i+1]
+            if i+1 < len(s) and s[i+1] <= '6':
+                dp[i] += dp[i+2]
+
+    return dp[0]
+
+print(dp_ways(s))
