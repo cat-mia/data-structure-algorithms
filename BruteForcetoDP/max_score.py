@@ -25,3 +25,27 @@ def func(arr):
     return max(first(arr, 0, len(arr)-1), second(arr, 0, len(arr)-1))
 
 print(func([100,1,7]))
+
+# 2 nested functions? how
+# 2 dp tables
+# 有用的只有矩阵上三角
+def dp_func(arr):
+    n = len(arr)
+    dp_s = [[0]*n for _ in range(n)]
+    dp_f = [[0]*n for _ in range(n)]
+    for i in range(n):
+        # dp_s[i][i] = 0  # 可以省略
+        dp_f[i][i] = arr[i]
+    for i in range(1,n):
+        row = 0
+        col = i
+        while row < n and col < n:
+            dp_f[row][col] = max(arr[row] + dp_s[row+1][col], arr[col] + dp_s[row][col-1])
+            dp_s[row][col] = min(dp_f[row+1][col], dp_f[row][col-1])
+            row += 1
+            col += 1
+    print(dp_f)
+    print(dp_s)
+    return max(dp_s[0][n-1], dp_f[0][n-1])
+
+print(dp_func([100,1,7]))
